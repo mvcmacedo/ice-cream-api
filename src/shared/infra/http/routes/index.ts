@@ -1,7 +1,9 @@
 import { Router } from 'express';
 
+import shopsRoutes from '@modules/shops/infra/http/routes/shopsRoutes';
+
 const routes = Router();
 
-routes.use('/', (req, res) => res.send({ message: 'Hello World' }));
+routes.use('/shops', shopsRoutes);
 
 export default routes;
