@@ -3,6 +3,7 @@ import { container } from 'tsyringe';
 
 import ListShopsService from '@modules/shops/services/ListShopsService';
 import GetShopService from '@modules/shops/services/GetShopService';
+import InvalidateAllService from '@modules/shops/services/InvalidateAllService';
 
 export default class ShopsController {
   async index(request: Request, response: Response): Promise<Response> {
@@ -11,7 +12,7 @@ export default class ShopsController {
     const listIceCreamShops = container.resolve(ListShopsService);
 
     const shops = await listIceCreamShops.execute({
-      location: String(location),
+      location: String(location) || 'Alpharetta', // default city
     });
 
     return response.json(shops);
@@ -27,5 +28,13 @@ export default class ShopsController {
     });
 
     return response.json(shop);
+  }
+
+  async delete(_: Request, response: Response): Promise<Response> {
+    const invalidateAll = container.resolve(InvalidateAllService);
+
+    await invalidateAll.execute();
+
+    return response.send();
   }
 }

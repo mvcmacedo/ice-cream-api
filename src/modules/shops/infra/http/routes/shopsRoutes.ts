@@ -10,6 +10,7 @@ const shopReviewsController = new ShopReviewsController();
 
 shopsRoute.get('/', shopsController.index);
 shopsRoute.get('/:id', shopsController.get);
+shopsRoute.delete('/', shopsController.delete);
 shopsRoute.get('/:id/reviews', shopReviewsController.index);
 
 export default shopsRoute;

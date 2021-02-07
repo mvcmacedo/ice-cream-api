@@ -26,7 +26,7 @@ export default class AxiosHttpClient implements IHttpClientProvider {
           resolve(response.data as T);
         })
         .catch((response: AxiosResponse) => {
-          reject(new AppError(`Failed to call Yelp API: ${response}`));
+          reject(new AppError(response.message));
         });
     });
   }
