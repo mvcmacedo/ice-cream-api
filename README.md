@@ -1,6 +1,6 @@
 # Ice Cream shops API
 
-Find the ice cream parlors closest to you!
+Find the ice cream shop closest to you!
 
 #
 
