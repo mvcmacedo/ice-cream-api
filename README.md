@@ -2,6 +2,16 @@
 
 Find the ice cream parlors closest to you!
 
+#
+
+## Production demo:
+
+### backend: https://ice-cream-api.herokuapp.com
+
+### frontend: https://ice-cream-web.netlify.app
+
+#
+
 ## Getting Started
 
 ### Prerequisites
@@ -52,6 +62,38 @@ yarn test
 ```
 yarn build
 ```
+
+## Resources
+
+### All endpoints are using redis as a cache provider.
+
+#
+
+List shops by city.
+
+```
+GET /shops?location=${city}
+```
+
+Get shop details by id.
+
+```
+GET /shops/${id}
+```
+
+List shop reviews.
+
+```
+GET /shops/${id}/reviews
+```
+
+Invalidate application cache.
+
+```
+DEL /shops
+```
+
+#
 
 ## Built With
 
