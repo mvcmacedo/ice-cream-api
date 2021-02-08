@@ -1,5 +1,5 @@
 import AppError from '@shared/errors/AppError';
-import axios, { AxiosRequestConfig, AxiosResponse } from 'axios';
+import axios, { AxiosRequestConfig, AxiosResponse, AxiosError } from 'axios';
 
 import {
   IHttpClientProvider,
@@ -8,26 +8,24 @@ import {
 
 export default class AxiosHttpClient implements IHttpClientProvider {
   public async get<T>(parameters: IHttpClientRequestParams): Promise<T> {
-    return new Promise<T>((resolve, reject) => {
-      const { url, token } = parameters;
-      let options: AxiosRequestConfig = {};
+    const { url, token } = parameters;
+    let options: AxiosRequestConfig = {};
 
-      if (token) {
-        options = {
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
-        };
-      }
+    if (token) {
+      options = {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      };
+    }
 
-      axios
-        .get(url, options)
-        .then((response: AxiosResponse) => {
-          resolve(response.data as T);
-        })
-        .catch((response: AxiosResponse) => {
-          reject(new AppError(response.message));
-        });
-    });
+    return axios
+      .get(url, options)
+      .then((response: AxiosResponse) => {
+        return response.data as T;
+      })
+      .catch((response: AxiosError) => {
+        throw new AppError(response.message);
+      });
   }
 }

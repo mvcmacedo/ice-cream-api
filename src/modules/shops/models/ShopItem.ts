@@ -1,4 +1,4 @@
-export interface Shop {
+export default interface Shop {
   id: string;
   alias: string;
   name: string;

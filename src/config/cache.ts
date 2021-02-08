@@ -9,12 +9,12 @@ interface ICacheConfing {
 }
 
 export default {
-  driver: 'redis',
+  driver: process.env.CACHE_DRIVER,
   config: {
     redis: {
-      host: 'localhost',
-      port: 6379,
-      password: undefined,
+      host: process.env.CACHE_HOST,
+      port: process.env.CACHE_PORT,
+      password: process.env.CACHE_PASSWORD,
     },
   },
 } as ICacheConfing;
